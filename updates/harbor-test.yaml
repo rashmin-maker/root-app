@@ -16,7 +16,6 @@ spec:
       values: |
         replicaCount: 2
     repoURL: https://github.com/rashmin-maker/root-app.git
-    targetRevision: 1.0.0
   syncPolicy:
     automated:
       prune: true
