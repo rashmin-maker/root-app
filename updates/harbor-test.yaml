@@ -11,11 +11,11 @@ spec:
     namespace: default
   project: default
   source:
-    chart: harbor-test
+    path: harbor-test/chart/
     helm:
       values: |
         replicaCount: 2
-    repoURL: https://github.com/rashmin-maker/root-app/tree/main/harbor-test/chart
+    repoURL: https://github.com/rashmin-maker/root-app.git
     targetRevision: 1.0.0
   syncPolicy:
     automated:
