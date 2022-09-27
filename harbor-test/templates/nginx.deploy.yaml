@@ -15,8 +15,8 @@ spec:
         app: harbor-test
     spec:
       containers:
-      - name: apache-web
-        image: amr-registry.caas.intel.com/intelcloud/infra/argocdtest:v1
+      - name: nginx-web
+        image: nginx
         ports:
         - containerPort: 80
         
