@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-deploy
+  labels:
+    app: harbor-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-test
+  template:
+    metadata:
+      labels:
+        app: harbor-test
+    spec:
+      containers:
+      - name: apache-web
+        image: amr-registry.caas.intel.com/intelcloud/infra/argocdtest:v1
+        ports:
+        - containerPort: 80
