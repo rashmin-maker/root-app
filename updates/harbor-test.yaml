@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: harbor-test
   namespace: default
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -11,13 +11,12 @@ spec:
     namespace: default
   project: default
   source:
-    chart: prometheus
+    chart: harbor-test
     helm:
       values: |
-        pushgateway:
-          enabled: false
-    repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 15.6.0
+        replicaCount: 2
+    repoURL: https://github.com/rashmin-maker/root-app/tree/main/harbor-test/chart
+    targetRevision: 1.0.0
   syncPolicy:
     automated:
       prune: true
