@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: harbor-deploy
   labels:
-    app: harbor-deploy
+    app: harbor-test
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
