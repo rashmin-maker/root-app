@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-telegraf-test
+  namespace: infra
+spec:
+  destination:
+    namespace: infra
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    path: "helm-values-files/telegraf"
+    repoURL: https://github.com/YotpoLtd/argocd-example.git
+    targetRevision: HEAD
+    plugin:
+      name: helm-yotpo
+      env:
+        - name: HELM_RELEASE_NAME
+          value: "telegraf-test"
+        - name: HELM_CHART_VERSION
+          value: "1.8.18"
+        - name: NAMESPACE
+          value: "infra"
+        - name: HELM_REPO_URL
+          value: "https://helm.influxdata.com/"
+        - name: HELM_CHART_NAME
+          value: "telegraf"
+        - name: HELM_VALUES_FILE
+          value: "telegraf.yaml"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
