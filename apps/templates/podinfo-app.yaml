@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: application-podinfo-test
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    path: "helm-values-files/podinfo"
+    repoURL: https://github.com/rashmin-maker/root-app.git
+    targetRevision: HEAD
+    plugin:
+      name: helm-values
+      env:
+        - name: HELM_RELEASE_NAME
+          value: "podinfo-test"
+        - name: HELM_CHART_VERSION
+          value: "6.2.1"
+        - name: HELM_REPO_URL
+          value: "https://stefanprodan.github.io/podinfo"
+        - name: HELM_CHART_NAME
+          value: "podinfo"
+        - name: HELM_VALUES_FILE
+          value: "podinfo.yaml"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
