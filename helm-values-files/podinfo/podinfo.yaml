@@ -2,6 +2,6 @@
 ## This is a YAML-formatted file.
 
 # default replicaCount: 1
-replicaCount: 5
+replicaCount: 2
 
 ui.message: "Welcome, IDCS Developer..!!"
