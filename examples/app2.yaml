@@ -25,9 +25,7 @@ spec:
         - name: HELM_CHART_VERSION
           value: "6.2.1"
         - name: HELM_REPO_URL
-          value: "https://stefanprodan.github.io/podinfo"
-        - name: HELM_CHART_NAME
-          value: "podinfo"
+          value: "https://stefanprodan.github.io/podinfo podinfo"
         - name: HELM_VALUES_FILE
           value: "podinfo.yaml"
   syncPolicy:
