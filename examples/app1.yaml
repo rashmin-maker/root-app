@@ -1,33 +1,18 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app1
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
-    namespace: default
     server: https://kubernetes.default.svc
+    namespace: default
   source:
-    path: "helm-values-files/podinfo"
-    repoURL: https://github.com/rashmin-maker/root-app.git
-    targetRevision: HEAD
-    plugin:
-      name: helm-values
-      env:
-        - name: HELM_RELEASE_NAME
-          value: "app1"
-        - name: HELM_CHART_VERSION
-          value: "6.2.1"
-        - name: HELM_REPO_URL
-          value: "https://stefanprodan.github.io/podinfo podinfo"
-        - name: HELM_VALUES_FILE
-          value: "podinfo.yaml"
+    repoURL: https://stefanprodan.github.io/podinfo
+    chart: podinfo
   syncPolicy:
     automated:
       prune: true
