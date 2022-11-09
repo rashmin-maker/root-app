@@ -1,27 +1,36 @@
 #!/usr/bin/env bash
-set -ex
+#set -ex
 
+printf "***** Rollout the Service v1.0 (blue)\n"
 kubectl apply -f rollout.yaml
 kubectl apply -f service.yaml
 read
 
+printf "***** Rollout the Service v2.0 (yellow)\n"
 kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:yellow
 read
 
+printf "***** Promote the Service v2.0 (yellow)\n"
 kubectl argo rollouts promote rollouts-demo
 read
 
+printf "***** Rollout the Service v3.0 (red)\n"
 kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:red
 read
 
+printf "***** Promote the Service v3.0 (red)\n"
 kubectl argo rollouts promote rollouts-demo
 read
 
+printf "***** Abort the Service v3.0 (red)\n"
 kubectl argo rollouts abort rollouts-demo
 read
 
+printf "***** Restore the Service v3.0 (yellow)\n"
 kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:yellow
 read
 
+printf "***** Clean up the environment\n"
 kubectl delete -f service.yaml
 kubectl delete -f rollout.yaml
+read
