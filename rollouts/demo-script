@@ -33,4 +33,3 @@ read
 printf "***** Clean up the environment\n"
 kubectl delete -f service.yaml
 kubectl delete -f rollout.yaml
-read
