@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -ex
+
+kubectl apply -f rollout.yaml
+kubectl apply -f service.yaml
+read
+
+kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:yellow
+read
+
+kubectl argo rollouts promote rollouts-demo
+read
+
+kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:red
+read
+
+kubectl argo rollouts promote rollouts-demo
+read
+
+kubectl argo rollouts abort rollouts-demo
+read
+
+kubectl argo rollouts set image rollouts-demo rollouts-demo=argoproj/rollouts-demo:yellow
+read
+
+kubectl delete -f service.yaml
+kubectl delete -f rollout.yaml
